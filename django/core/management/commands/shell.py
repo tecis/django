@@ -20,7 +20,7 @@ class Command(BaseCommand):
     )
 
     requires_system_checks = []
-    shells = ["ipython", "bpython", "python"]
+    shells = ["ipython", "bpython", "pyrepl", "python"]
 
     def add_arguments(self, parser):
         parser.add_argument(
@@ -63,6 +63,10 @@ class Command(BaseCommand):
         import bpython
 
         bpython.embed(self.get_namespace(**options))
+
+    def pyrepl(self, options):
+        from _pyrepl.main import interactive_console
+        interactive_console()
 
     def python(self, options):
         import code
